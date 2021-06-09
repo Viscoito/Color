@@ -1,0 +1,16 @@
+{
+    "name": "color",
+    "version": "0.0.1",
+    "description": "Arco iro.",
+    "main": "Color.js",
+    "scripts": {
+        "start": "node Color.js"
+    },
+    "dependencies": {
+        "dank-twitch-irc": "^4.3.0",
+        "rainbowvis.js": "^1.0.1"
+    },
+    "engines": {
+        "node": "12.x"
+    }
+}
