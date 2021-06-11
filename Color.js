@@ -13,21 +13,21 @@ const opts = {
   channels: config.channels.map(chn => chn.toLowerCase())
 };
 
-let c = new ChatClient(opts);
+let client = new ChatClient(opts);
 
-c.on("ready", () => {
+client.on("ready", () => {
   console.log(`Conectado ao chat com sucesso DankMods`);
 });
-c.on("close", error => {
+client.on("close", error => {
   if (error != null) {
     console.error("Erro ", error);
   }
 });
-c.use(new SlowModeRateLimiter(c), 2);
-c.use(new AlternateMessageModifier(c));
+client.use(new SlowModeRateLimiter(client), 2);
+client.use(new AlternateMessageModifier(client));
 
-c.connect();
-c.joinAll(opts.channels);
+client.connect();
+client.joinAll(opts.channels);
 
 var rainbow = new Rainbow()
 
@@ -35,10 +35,10 @@ var rainbow = new Rainbow()
 rainbow.setSpectrum('red', 'FF00E4', '00DEFF', '00FF2A', 'FFEA00', 'red');
 
 var n = 0
-c.on("PRIVMSG", async msg => {
+client.on("PRIVMSG", async msg => {
   if (msg.senderUsername == opts.username) {
     n += 5
-    c.privmsg(opts.username, "/color #" + rainbow.colourAt(n))
+    client.privmsg(opts.username, "/color #" + rainbow.colourAt(n))
     if (n >= 100) {
       n = 0
     }
